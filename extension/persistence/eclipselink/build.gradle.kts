@@ -48,6 +48,7 @@ dependencies {
     }
   }
 
+  runtimeOnly("org.postgresql:postgresql:42.7.4")
   compileOnly(libs.jakarta.annotation.api)
 
   testImplementation(libs.h2)
