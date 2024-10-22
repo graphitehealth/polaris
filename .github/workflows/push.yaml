@@ -28,7 +28,7 @@ name: Publish Polaris Server
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "shantanu" ]
 
 jobs:
   build:
@@ -46,8 +46,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: '21'
-          distribution: 'temurin'
-
+          distribution: 'microsoft'
       # Configure Gradle for optimal use in GiHub Actions, including caching of downloaded dependencies.
       # See: https://github.com/gradle/actions/blob/main/setup-gradle/README.md
       - name: Setup Gradle
@@ -56,7 +55,6 @@ jobs:
           # The setup-gradle action fails, if the wrapper is not using the right version or is not present.
           # Our `gradlew` validates the integrity of the `gradle-wrapper.jar`, so it's safe to disable this.
           validate-wrappers: false
-
       - name: Build with Gradle Wrapper
         run: ./gradlew build
         env:
@@ -83,8 +81,8 @@ jobs:
         with:
           images: ${{ vars.CONTAINER_REGISTRY }}/${{ github.repository }}
           tags: |
+            type=raw,value=shantanu
             type=sha
-            type=raw,value=${{ steps.date.outputs.date }}
       - name: Docker Build
         uses: docker/build-push-action@v5
         with:
@@ -92,4 +90,3 @@ jobs:
           push: true
           platforms: linux/amd64,linux/arm64
           tags: ${{ steps.meta.outputs.tags }}
-
