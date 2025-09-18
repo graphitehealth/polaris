@@ -17,7 +17,7 @@
 # under the License.
 #
 
-FROM ubuntu:24.04 AS hugo
+FROM ubuntu:24.10 AS hugo
 
 ENV LANGUAGE='en_US:en'
 
